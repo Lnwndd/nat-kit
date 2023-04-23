@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png" />
+
+    <script>
+        const documentHeight = () => {
+            const doc = document.documentElement
+            doc.style.setProperty('--doc-height', `${window.innerHeight}px`)
+        }
+        window.addEventListener('resize', documentHeight)
+        documentHeight()
+    </script>
+
+    <script src="scripts/jquery-3.5.1.min.js"></script>
+    <script src="scripts/jquery.transit.min.js"></script>
+    <script src="scripts/jquery-cookie-1.4.1.min.js"></script>
+    <script src="scripts/showdown.min.js"></script>
+    <script src="scripts/popper.js"></script>
+    <script src="scripts/purify.min.js"></script>
+    <script type="module" src="scripts/power-user.js"></script>
+    <script type="module" src="scripts/swiped-events.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="css/bg_load.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <script type=module src="script.js"></script>
+
+    <script type="module" src="scripts/world-info.js"></script>
+    <script type="module" src="scripts/group-chats.js"></script>
+    <script type="module" src="scripts/kai-settings.js"></script>
+    <script type="module" src="scripts/textgen-settings.js"></script>
+    <script type="module" src="scripts/bookmarks.js"></script>
+    <script type="module" src="scripts/horde.js"></script>
+    <script type="module" src="scripts/poe.js"></script>
+    <script type="module" src="scripts/RossAscends-mods.js"></script>
+
+    <title>이곳을 수정해주세요</title>
+</head>
+
+<body class="no-blur">
+
+    <div id="bg1"></div>
+    <div id="bg2"></div>
+
+    <!-- top bar central settings buttons -->
+    <div id="top-bar">
+    </div>
+    <div id="top-settings-holder">
+        <!-- background selection menu -->
+
+        <div id="ai-config-button" class="drawer" style="z-index:3002;">
+            <div class="drawer-toggle drawer-header">
+                <div id="leftNavDrawerIcon" class="drawer-icon icon-sliders closedIcon" title="AI Response Configuration"></div>
+            </div>
+            <div id="left-nav-panel" class="drawer-content fillLeft closedDrawer widthFreeExpand">
+                <div class="right_menu_button" id="lm_button_panel_pin_div" title="Locked = AI Configuration panel will stay open">
+                    <input type="checkbox" id="lm_button_panel_pin">
+                    <label for="lm_button_panel_pin">
+                        <img class="unchecked svg_icon" alt="" src="img/lock-open-solid.svg" />
+                        <img class="checked svg_icon" alt="" src="img/lock-solid.svg" />
+                    </label>
+                </div>
+                <div class="flex-container">
+                    <div id="respective-presets-block" class="width100p">
+                        <div id="kobold_api-presets">
+                            <h3>Kobold 프리셋
+                                <a href="/notes/4" class="notes-link" target="_blank">
+                                    <span class="note-link-span">?</span>
+                                </a>
+                            </h3>
+
+                            <select id="settings_perset">
+                                <option value="gui">GUI KoboldAI 세팅</option>
+                            </select>
+                        </div>
+                        <div id="novel_api-presets">
+                            <h3>
+                                NovelAI 프리셋
+                                <a href="/notes/7" class="notes-link" target="_blank">
+                                    <span class="note-link-span">?</span>
+                                </a>
+                            </h3>
+                            <select id="settings_perset_novel">
+                                <option value="gui">기본값</option>
+                            </select>
+                        </div>
+                        <div id="openai_api-presets">
+                            <div>
+                                <h4>Nat Dev 프리셋</h4>
+                                <select id="settings_perset_openai">
+                                    <option value="gui">기본값</option>
+                                </select>
+                            </div>
+                            <div>
+                                <h4>Nat Dev 모델</h4>
+                                <select id="model_openai_select">
+                                    <option value="gpt-4">GPT 4.0</option>
+                                    <option value="gpt-3.5-turbo">GPT 3.5 터보</option>
+                                    <option value="claude-v1">Claude v1</option>
+                                    <option value="claude-instant-v1.0">Claude Instant v1.0</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="textgenerationwebui_api-presets">
+                            <h3>Text generation web UI presets</h3>
+                            <select id="settings_preset_textgenerationwebui">
+                            </select>
+                        </div>
+                        <div id="poe_api-presets">
+                            <h3>Poe.com API Settings</h3>
+                            <!-- just a placeholder title for the Poe.com settings panel-->
+
+                        </div>
+                    </div>
+                    <div id="common-gen-settings-block" class="width100p">
+                        <div id="pro-settings-block">
+                            <div id="amount_gen_block" class="range-block">
+                                <div class="range-block-title">
+                                    최대 답변 길이
+                                </div>
+                                <span id="amount_gen_counter" class="range-block-counter">선택</span>
+                                <input type="range" class="range-block-range" id="amount_gen" name="volume" min="16" max="512" step="1">
+                            </div>
+                            <div id="max_context_block" class="range-block">
+                                <div class="range-block-title">
+                                    최대 컨텍스트 사이즈
+                                </div>
+                                <span id="max_context_counter" class="range-block-counter">선택</span>
+                                <input type="range" class="range-block-range" id="max_context" name="volume" min="512" max="2048" step="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="respective-ranges-and-temps" class="width100p">
+                        <div id="range_block">
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    AI 창의력 설정 (권장 : 0.7~0.9)
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="temp_counter">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="temp" name="volume" min="0.1" max="2.0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    대화에서 반복되는 단어 사용 패널티
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="rep_pen_counter">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="rep_pen" name="volume" min="1" max="1.5" step="0.01">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    반복되는 단어 사용 패널티 검색 길이
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="rep_pen_range_counter">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="rep_pen_range" name="volume" min="0" max="2048" step="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="range_block_novel">
+                        </div>
+                        <div id="range_block_textgenerationwebui">
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    AI 창의력 설정 (권장 : 0.7~0.9)
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="temp_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="temp_textgenerationwebui" name="volume" min="0.1" max="2.0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    짧은 대화에서 반복되는 단어 사용 패널티
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="rep_pen_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="rep_pen_textgenerationwebui" name="volume" min="1" max="1.5" step="0.01">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Encoder Repetition Penalty
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="encoder_rep_pen_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="encoder_rep_pen_textgenerationwebui" name="volume" min="0.8" max="1.5" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    No Repeat Ngram Size
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="no_repeat_ngram_size_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="no_repeat_ngram_size_textgenerationwebui" name="volume" min="0" max="20" step="1">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Min Length
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="min_length_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="min_length_textgenerationwebui" name="volume" min="0" max="2000" step="1" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <label class="checkbox_label" for="do_sample_textgenerationwebui">
+                                    <input type="checkbox" id="do_sample_textgenerationwebui" />
+                                    Do Sample
+                                </label>
+                            </div>
+                            <div class="range-block">
+                                <label class="checkbox_label" for="add_bos_token_textgenerationwebui" title="Add the bos_token to the beginning of prompts. Disabling this can make the replies more creative.">
+                                    <input type="checkbox" id="add_bos_token_textgenerationwebui" />
+                                    Add BOS Token
+                                </label>
+                            </div>
+                        </div>
+                        <div id="range_block_openai">
+                            <div class="range-block">
+                                <div class="range-block-range">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Nat Dev 컨텍스트 사이즈
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="openai_max_context_counter">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="openai_max_context" name="volume" min="512" max="4095" step="1">
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Nat Dev 최대 답변 길이 (권장 : 400~700)
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="number" id="openai_max_tokens" name="openai_max_tokens" class="text_pole" min="50" max="1000">
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    AI 창의력 설정 (권장 : 0.7~0.9)
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="temp_counter_openai">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="temp_openai" name="volume" min="0" max="2.0" step="0.01">
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    짧은 대화에서 반복되는 단어 사용 패널티
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="freq_pen_counter_openai">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="freq_pen_openai" name="volume" min="0" max="1" step="0.01">
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    전체 대화에서 반복되는 단어 사용 패널티
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="pres_pen_counter_openai">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="pres_pen_openai" name="volume" min="0" max="1" step="0.01">
+                                </div>
+                            </div>
+
+                            <div style="display:none" class="range-block">
+                                <div class="range-block-title">
+                                    Logit Bias
+                                </div>
+                                <div class="openai_logit_bias" hidden>
+                                    <div class="openai_logit_bias_form">
+                                        <input class="text_pole" id="openai_logit_bias_text" placeholder="text (will be converted to tokens)" />
+                                        <div class="openai_logit_bias_range_block">
+                                            <div class="range-block-counter">
+                                                <span id="openai_logit_bias_value_counter">선택</span>
+                                            </div>
+                                            <input id="openai_logit_bias_value" type="range" min="-100" value="0" max="100" />
+                                        </div>
+                                        <input class="menu_button" id="openai_logit_bias_add" type="button" value="Add" />
+                                    </div>
+                                    <div class="openai_logit_bias_list">
+                                        <div class="openai_logit_bias_list_item">
+                                            <span class="token_id">666</span>
+                                            <span class="separator">:</span>
+                                            <span class="bias_value">-100</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="range_block_poe">
+                            <div class="range-block">
+                                <label for="poe_auto_purge" class="checkbox_label">
+                                    <input id="poe_auto_purge" type="checkbox">
+                                    자동 채팅 캐쉬 삭제
+                                </label>
+                                <div class="range-block-counter justifyLeft">
+                                    각 프롬프트가 전송되기 전에 메세지를 미리 삭제합니다.
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <label for="poe_auto_jailbreak" class="checkbox_label">
+                                    <input id="poe_auto_jailbreak" type="checkbox">
+                                    자동 탈옥 모드
+                                </label>
+                                <div class="range-block-counter justifyLeft">
+                                    자동으로 탈옥 프롬프트를 전송하고 컨텍스트에 저장합니다.
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <label for="poe_character_nudge" class="checkbox_label">
+                                    <input id="poe_character_nudge" type="checkbox" />
+                                    캐릭터 노트 전송
+                                </label>
+                                <div class="range-block-counter justifyLeft">
+                                    AI 가 설정한 캐릭터로만 답글을 작성하도록 유도합니다.
+                                </div>
+                                <div class="range-block-range">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="advanced-ai-config-block" class="width100p">
+                        <div id="kobold_api-settings">
+                            <div id="kobold-advanced-config">
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Top P Sampling
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="top_p_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="top_p" name="volume" min="0" max="1" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Top A Sampling
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="top_a_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="top_a" name="volume" min="0" max="1" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Top K Sampling
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="top_k_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="top_k" name="volume" min="0" max="100" step="1">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Typical Sampling
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="typical_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="typical" name="volume" min="0" max="1" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Tail Free Sampling
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="tfs_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="tfs" name="volume" min="0" max="1" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <div class="range-block-title">
+                                        Repetition Penalty Slope
+                                    </div>
+                                    <div class="range-block-counter">
+                                        <span id="rep_pen_slope_counter">선택</span>
+                                    </div>
+                                    <div class="range-block-range">
+                                        <input type="range" id="rep_pen_slope" name="volume" min="0" max="10" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="range-block">
+                                    <label class="checkbox_label" for="single_line">
+                                        <input id="single_line" type="checkbox" />
+                                        Single-line mode
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="novel_api-settings">
+                            <h4>Novel AI 모델
+                                <a href="/notes/8" class="notes-link" target="_blank">
+                                    <span class="note-link-span">?</span>
+                                </a>
+                            </h4>
+                            <select id="model_novel_select">
+                                <option value="euterpe-v2">Euterpe</option>
+                                <option value="krake-v2">Krake</option>
+                            </select>
+                            <div class="range-block-title">
+                                AI 창의력 설정 (권장 : 0.7~0.9)
+                            </div>
+                            <div class="range-block-counter">
+                                <span id="temp_counter_novel">선택</span>
+                            </div>
+                            <div class="range-block-range">
+                                <input type="range" id="temp_novel" name="volume" min="0.1" max="2.0" step="0.01">
+                            </div>
+                            <div class="range-block-title">
+                                짧은 대화에서 반복되는 단어 사용 패널티
+                            </div>
+                            <div class="range-block-counter">
+                                <span id="rep_pen_counter_novel">선택</span>
+                            </div>
+                            <div class="range-block-range">
+                                <input type="range" id="rep_pen_novel" name="volume" min="1" max="1.5" step="0.01">
+                            </div>
+                            <div class="range-block-title"></div>
+                            반복되는 단어 사용 패널티 검색 길이
+
+                            <div class="range-block-counter">
+                                <span id="rep_pen_size_counter_novel">선택</span>
+                            </div>
+                            <div class="range-block-range">
+                                <input type="range" id="rep_pen_size_novel" name="volume" min="0" max="2048" step="1">
+                            </div>
+
+                        </div>
+                        <div id="textgenerationwebui_api-settings">
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Top K
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="top_k_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="top_k_textgenerationwebui" name="volume" min="0" max="200" step="1">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Top P
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="top_p_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="top_p_textgenerationwebui" name="volume" min="0" max="1" step="0.01">
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Typical P
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="typical_p_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="typical_p_textgenerationwebui" name="volume" min="0" max="1" step="0.01">
+                                </div>
+                            </div>
+                            <h4>Beam search</h4>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Number of Beams
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="num_beams_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="num_beams_textgenerationwebui" name="volume" min="1" max="20" step="1" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Length Penalty
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="length_penalty_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="length_penalty_textgenerationwebui" name="volume" min="-5" max="5" step="0.1" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <label class="checkbox_label" for="early_stopping_textgenerationwebui">
+                                    <input type="checkbox" id="early_stopping_textgenerationwebui" />
+                                    Early Stopping
+                                </label>
+                            </div>
+                            <h4>Contrastive search</h4>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Penalty Alpha
+                                </div>
+                                <div class="range-block-counter">
+                                    <span id="penalty_alpha_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="range" id="penalty_alpha_textgenerationwebui" name="volume" min="0" max="5" step="0.05" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    Seed
+                                </div>
+                                <div style="display: none" class="range-block-counter">
+                                    <span id="seed_counter_textgenerationwebui">선택</span>
+                                </div>
+                                <div class="range-block-range">
+                                    <input type="number" id="seed_textgenerationwebui" class="text_pole" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="openai_settings">
+                            <div class="flex-container">
+                                <div class="range-block">
+                                    <label title="시스템 메세지 뒤에 탈옥 명령어를 추가합니다" class="checkbox_label">
+                                        <input id="jailbreak_system" type="checkbox" />
+                                        탈옥 모드
+                                    </label>
+                                </div>
+								
+                                <div class="range-block">
+                                    <label class="checkbox_label" for="nsfw_toggle">
+                                        <input id="nsfw_toggle" type="checkbox" checked>
+                                        NSFW 모드
+                                    </label>
+                                </div>
+
+                                <div class="range-block">
+                                    <label title="NSFW 명령어가 시스템에 먼저 적용됩니다" class="checkbox_label">
+                                        <input id="nsfw_first" type="checkbox" />
+                                        NSFW 우선
+                                    </label>
+                                </div>
+
+                                <!-- Currently broken -->
+                                <div style="display: none" class="range-block">
+                                    <label title="OpenAI 완성 스트리밍을 적용합니다" class="checkbox_label" for="stream_toggle">
+                                        <input id="stream_toggle" type="checkbox" />
+                                        스트리밍
+                                    </label>
+                                </div>
+
+                                <div class="range-block">
+                                    <label title="만약 AI 가 해당 캐릭터에 대해 알고 있다면 지식과 정의를 혼합해 강화합니다" class="checkbox_label">
+                                        <input id="enhance_definitions" type="checkbox" />
+                                        캐릭터 강화
+                                    </label>
+                                </div>
+
+                                <div class="range-block">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="range-block">
+                                <div class="range-block-title openai_restorable">
+                                    <span>메인 프롬프트</span>
+                                    <div id="main_prompt_restore" title="Restore default prompt" class="right_menu_button">
+                                        <img alt="" class="svg_icon" src="img/clock-rotate-left-solid.svg" />
+                                    </div>
+                                </div>
+                                <div class="range-block-counter">
+                                    기본 AI 시스템과 작동법을 정의하는 프롬프트 입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <textarea id="main_prompt_textarea" class="text_pole" name="main_prompt" rows="3" placeholder=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title openai_restorable">
+                                    <span>NSFW 프롬프트</span>
+                                    <div id="nsfw_prompt_restore" title="Restore default prompt" class="right_menu_button">
+                                        <img alt="" class="svg_icon" src="img/clock-rotate-left-solid.svg" />
+                                    </div>
+                                </div>
+                                <div class="range-block-counter">
+                                    NSFW 모드가 활성화 되었을 때 추가되는 프롬프트 입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <textarea id="nsfw_prompt_textarea" class="custom_textarea" name="nsfw_prompt" rows="3" placeholder=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="range-block">
+                                <div class="range-block-title openai_restorable">
+                                    <span>탈옥 프롬프트</span>
+                                    <div id="jailbreak_prompt_restore" title="Restore default prompt" class="right_menu_button">
+                                        <img alt="" class="svg_icon" src="img/clock-rotate-left-solid.svg" />
+                                    </div>
+                                </div>
+                                <div class="range-block-counter">
+                                    탈옥 모드가 활성화 되었을 때 추가되는 프롬프트 입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <textarea id="jailbreak_prompt_textarea" class="custom_textarea" name="jailbreak_prompt" rows="3" placeholder=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="range-block openai_preset_buttons">
+                                <input id="update_preset" class="menu_button" type="button" value="프리셋 업데이트">
+                                <input id="new_preset" class="menu_button" type="button" value="새 프리셋 생성">
+                            </div>
+                        </div>
+
+                        <div id="poe_settings">
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    탈옥 모드에 적용할 명령어
+                                </div>
+                                <div class="range-block-counter justifyLeft">
+                                    탈옥 모드가 활성화 되었을 때 추가되는 프롬프트 입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <textarea id="poe_activation_message" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    탈옥 성공시 AI 답변
+                                </div>
+                                <div class="range-block-counter justifyLeft">
+                                    탈옥 모드 적용이 성공하였을 때 AI 의 답장 입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <input id="poe_activation_response" class="text_pole" type="text" />
+                                </div>
+                            </div>
+                            <div class="range-block">
+                                <div class="range-block-title">
+                                    캐릭터 노트 텍스트
+                                </div>
+                                <div class="range-block-counter justifyLeft">
+                                    캐릭터 노트 전송이 활성화 되었을 때 AI 의 답장입니다.
+                                </div>
+                                <div class="range-block-range">
+                                    <textarea id="poe_nudge_text" class="text_pole" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="sys-settings-button" class="drawer" style="z-index:3001;">
+            <div class="drawer-toggle drawer-header">
+                <div id="API-status-top" class="drawer-icon icon-api closedIcon" title="API Connections"></div>
+            </div>
+            <div id="rm_api_block" class="drawer-content closedDrawer">
+                <div id="main-API-selector-block">
+                    <h3 id="title_api">API 설정</h3>
+                    <select id="main_api">
+                        <option value="kobold">Kobold AI</option>
+                        <option value="textgenerationwebui">TGWeb UI</option>
+                        <option value="novel">Novel AI</option>
+                        <option value="openai">Nat Dev</option>
+                        <option value="poe">Poe</option>
+                    </select>
+                </div>
+                <div id="kobold_api" style="position: relative;"> <!-- shows the kobold settings -->
+                    <form action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                        <label for="use_horde" class="checkbox_label">
+                            <input id="use_horde" type="checkbox" />
+                            호드 사용
+                            <a target="_blank" href="https://horde.koboldai.net/">도움말</a>
+                        </label>
+                        <div id="kobold_api_block">
+                            <h4>API URL</h4>
+                            <h5>예시: http://127.0.0.1:5000/api </h5>
+                            <input id="api_url_text" name="api_url" class="text_pole" maxlength="500" value="" autocomplete="off">
+                            <input id="api_button" class="menu_button" type="submit" value="연결하기">
+                            <img id="api_loading" src="img/load.svg">
+                        </div>
+                        <div id="kobold_horde_block">
+
+                            <label for="horde_auto_adjust" class="checkbox_label">
+                                <input id="horde_auto_adjust" type="checkbox" />
+                                Adjust generation to worker capabilities
+                            </label>
+                            <h4>API 키</h4>
+                            <h5>이곳에서 확인 : <a target="_blank" href="https://horde.koboldai.net/register">리지스터</a>
+                            </h5>
+                            <input id="horde_api_key" name="horde_api_key" class="text_pole" maxlength="500" value="0000000000" autocomplete="off">
+                            <h4 class="horde_model_title">
+                                Model
+                                <div id="horde_refresh" title="Refresh models" class="right_menu_button">
+                                    <img class="svg_icon" src="img/repeat-solid.svg" />
+                                </div>
+                            </h4>
+                            <select id="horde_model">
+                                <option>-- 호드 모델이 불러와지지 않았습니다 --</option>
+                            </select>
+                        </div>
+                        <div id="online_status2">
+                            <div id="online_status_indicator2"></div>
+                            <div id="online_status_text2">연결 끊김...</div>
+                        </div>
+                    </form>
+                </div>
+                <div id="novel_api" style="display: none;position: relative;"> <!-- shows the novel settings -->
+                    <form action="javascript:void(null);" method="post" enctype="multipart/form-data">
+
+                        <h4>API 키</h4>
+                        <h5>여기에서 확인하세요 :
+                            <a href="/notes/6" class="notes-link" target="_blank">
+                                <span class="note-link-span">?</span>
+                            </a>
+                        </h5>
+                        <input id="api_key_novel" name="api_key_novel" class="text_pole" maxlength="500" size="35" value="" autocomplete="off">
+                        <input id="api_button_novel" class="menu_button" type="submit" value="연결하기">
+                        <img id="api_loading_novel" src="img/load.svg">
+                    </form>
+                    <div id="online_status3">
+                        <div id="online_status_indicator3"></div>
+                        <div id="online_status_text3">연결 끊김...</div>
+                    </div>
+                </div>
+                <div id="textgenerationwebui_api" style="display: none;position: relative;">
+                    <div class="oobabooga_logo">
+                        <a href="https://github.com/oobabooga/text-generation-webui" target="_blank">
+                            oobabooga/text-generation-webui
+                        </a>
+                    </div>
+                    <span>
+                        반드시 확인하세요! :
+                        <ul>
+                            <li>
+                                옵션 중
+                                <pre>--no-stream</pre> 확인
+                            </li>
+                            <li>
+                                 노트북 모드에서 (not
+                                <pre>--cai-chat</pre> or
+                                <pre>--chat</pre>)
+                            </li>
+                        </ul>
+                    </span>
+                    <form action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                        <h4>API URL</h4>
+                        <h5>예시 : http://127.0.0.1:7860/ </h5>
+                        <input id="textgenerationwebui_api_url_text" name="textgenerationwebui_api_url" class="text_pole" maxlength="500" value="" autocomplete="off">
+                        <input id="api_button_textgenerationwebui" class="menu_button" type="submit" value="연결하기">
+                        <img id="api_loading_textgenerationwebui" src="img/load.svg">
+                    </form>
+                    <div class="online_status4">
+                        <div class="online_status_indicator4"></div>
+                        <div class="online_status_text4">연결 끊김...</div>
+                    </div>
+                </div>
+                <div id="openai_api" style="display: none;position: relative;">
+                    <form action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                        <h4>API 키 </h4>
+                        <h4>Nat Dev 바로가기 :
+                            <a href="https://nat.dev/" class="notes-link" target="_blank">
+                                <span class="note-link-span">?</span>
+                            </a>
+                        </h4>
+                        <input id="api_key_openai" name="api_key_openai" class="text_pole" maxlength="500" value="" autocomplete="off">
+                        <input id="api_button_openai" class="menu_button" type="submit" value="연결하기">
+                        <img id="api_loading_openai" src="img/load.svg">
+                    </form>
+                    <div class="online_status4">
+                        <div class="online_status_indicator4"></div>
+                        <div class="online_status_text4">연결 끊김...</div>
+                    </div>
+                    <br>
+                </div>
+                <div id="poe_api">
+                    <div class="inline-drawer">
+                        <div class="inline-drawer-toggle inline-drawer-header">
+                            <b>사용 설명서 :</b>
+                            <div class="inline-drawer-icon down"></div>
+                        </div>
+                        <div class="inline-drawer-content">
+                            <ol>
+                                <li>poe.com<a href="https://poe.com" target="_blank">에 로그인</a></li>
+                                <li>개발자 도구(F12)를 열고 "Application" 탭으로 이동</li>
+                                <li>poe.com 도메인에 대한 "p-b" 쿠키를 찾아 값을 복사</li>
+                                <li>쿠키 값을 아래 상자에 붙여넣고 "Connect"을 클릭</li>
+                                <li>캐릭터를 선택하고 채팅 시작</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="range-block">
+                        <div class="range-block-title">
+                            poe.com 접속 토큰 ( p-b 쿠키 값 )
+                        </div>
+                        <div class="range-block-range">
+                            <input id="poe_token" class="text_pole" type="text" placeholder="Example: nTLG2bNvbOi8qxc-DbaSlw%3D%3D" />
+                        </div>
+                    </div>
+
+                    <input id="poe_connect" class="menu_button" type="button" value="연결하기" />
+                    <img id="api_loading_poe" src="img/load.svg">
+
+                    <div class="range-block">
+                        <div class="range-block-title">
+                            <h4>Bot</h4>
+                        </div>
+                        <div class="range-block-range">
+                            <select id="poe_bots">
+                                <option>-- API 에 연결 --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="online_status4">
+                        <div class="online_status_indicator4"></div>
+                        <div class="online_status_text4">연결 끊김...</div>
+                    </div>
+                </div>
+
+                <label for="auto-connect-checkbox" class="checkbox_label"><input id="auto-connect-checkbox" type="checkbox" />
+                    최근 사용한 서버에 자동 연결
+                </label>
+            </div>
+        </div>
+        <div id="advanced-formatting-button" class="drawer" style="z-index:3005;">
+            <div class="drawer-toggle">
+                <div class="drawer-icon icon-formatting closedIcon" title="AI Reponse Formatting"></div>
+            </div>
+            <div class="drawer-content">
+                <h3>고급 캐릭터 서식 설정
+                    <a href="/notes/advanced_formatting" class="notes-link" target="_blank">
+                        <span class="note-link-span">?</span>
+                    </a>
+                </h3>
+                <label class="checkbox_label" for="disable-description-formatting-checkbox">
+                    <input id="disable-description-formatting-checkbox" type="checkbox" />
+                    캐릭터 - 설명 비활성화
+                </label>
+                <label class="checkbox_label" for="disable-scenario-formatting-checkbox">
+                    <input id="disable-scenario-formatting-checkbox" type="checkbox" />
+                    캐릭터 - 시나리오 비활성화
+                </label>
+                <label class="checkbox_label" for="disable-personality-formatting-checkbox">
+                    <input id="disable-personality-formatting-checkbox" type="checkbox" />
+                    캐릭터 - 성격 요약 비활성화
+                </label>
+                <hr>
+                <label class="checkbox_label" for="always-force-name2-checkbox">
+                    <input id="always-force-name2-checkbox" type="checkbox" />
+                    대화 앞에 캐릭터 이름을 항상 표시
+                </label>
+                <label class="checkbox_label" for="force-pygmalion-formatting-checkbox">
+                    <input id="force-pygmalion-formatting-checkbox" type="checkbox" />
+                    모든 모델에 피그말리온 서식 적용
+                </label>
+                <label class="checkbox_label" for="multigen">
+                    <input id="multigen" type="checkbox" />
+                    <span>
+                        Multigen 활성화
+                        <a href="/notes/multigen" class="notes-link" target="_blank">
+                            <span class="note-link-span">?</span>
+                        </a>
+                    </span>
+                </label>
+                <label class="checkbox_label" for="pin-examples-checkbox">
+                    <input id="pin-examples-checkbox" type="checkbox" />
+                    예제 메세지 유지
+                </label>
+                <label class="checkbox_label" for="collapse-newlines-checkbox"><input id="collapse-newlines-checkbox" type="checkbox" />
+                    줄바꿈 최소화
+                </label>
+                <hr>
+                <div class="range-block">
+                    <div class="range-block-title">
+                        사용자 지정 대화 구분 기호
+                    </div>
+                    <div class="range-block-range">
+                        <input id="custom_chat_separator" class="text_pole" type="text" placeholder="&lt;START&gt;" />
+                    </div>
+                </div>
+                <hr>
+                <div id="anchors-block">
+                    <h3>
+                        대화 길이 증가 설정
+                        <a href="/notes/9" class="notes-link" target="_blank">
+                            <span class="note-link-span">?</span>
+                        </a>
+                    </h3>
+					<h5>
+						캐릭터에 대화, 작문 스타일이 지정되어 있다면 사용하지 마세요.<br>토큰만 사용하고 적용되지 않거나 너무 길게 작성될 수 있습니다.
+					</h5>
+                    <select id="anchor_order">
+                        <option value="0">캐릭터 대사 우선 적용</option>
+                        <option value="1">전체 대사 우선 적용</option>
+                    </select>
+                    <div id="anchor_checkbox">
+                        <label for="character_anchor"><input id="character_anchor" type="checkbox" />
+                            캐릭터 대사에 강화 사용
+                        </label>
+                        <label for="style_anchor"><input id="style_anchor" type="checkbox" />
+                            전체 대사에 강화 사용
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div id="WI-SP-button" class="drawer" style="z-index:3003;">
+            <div class="drawer-toggle drawer-header">
+                <div class="drawer-icon icon-globe closedIcon " title="World Info & Soft Prompts"></div>
+            </div>
+            <div class="drawer-content closedDrawer">
+                <div id="wi-holder">
+                    <div id="world_info_block">
+                        <h3>월드 인포 설정</h3>
+                        <div id="world_info_buttons">
+                            <div id="world_create_button" class="right_menu_button">
+                                <h4>+새로 만들기</h4>
+                            </div>
+                            <div id="world_import_button" class="right_menu_button">
+                                <h4>+불러오기</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>사용 설명서 :<a href="/notes/13" class="notes-link" target="_blank"><span class="note-link-span">?</span></a><br><br>▼ 선택된 월드 인포</h4>
+                    <div id="rm_world_import" class="right_menu" style="display: none;">
+                        <form id="form_world_import" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                            <input type="file" id="world_import_file" accept=".json" name="avatar">
+                        </form>
+                    </div>
+                    <select id="world_info">
+                        <option value="None">없음</option>
+                    </select>
+                    <input id="world_info_edit_button" class="menu_button" type="submit" value="세부 설정">
+                    <div id="world_info_depth_block">
+                        <h4>
+                            스캔할 최근 메세지 갯수 <a href="/notes/13_1" class="notes-link" target="_blank"><span class="note-link-span">?</span></a>
+                        </h4>
+                        <span id="world_info_depth_counter">depth</span>
+                        <input type="range" id="world_info_depth" name="volume" min="1" max="10" step="1">
+                    </div>
+                    <div id="world_info_budget_block">
+                        <h4>
+                            최대 사용 토큰 제한<a href="/notes/13_2" class="notes-link" target="_blank"><span class="note-link-span">?</span></a>
+                        </h4>
+                        <span id="world_info_budget_counter">budget</span>
+                        <input type="range" id="world_info_budget" name="volume" min="32" max="2048" step="16">
+                    </div>
+                </div>
+                <div id="softprompt_block">
+                    <h4>소프트 프롬프트</h4>
+                    <h5>소프트 프롬프트 설명서 <a href="/notes/14" class="notes-link" target="_blank"><span class="note-link-span">?</span></a></h5>
+                    <select id="softprompt">
+                        <option value="">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="user-settings-button" class="drawer" style="z-index:3004;">
+            <div class="drawer-toggle">
+                <div class="drawer-icon icon-user closedIcon" title="User Settings"></div>
+            </div>
+            <div id="user-settings-block" class="drawer-content closedDrawer">
+                <h3>유저 설정</h3>
+                <h4>프로필 사진 선택</h4>
+                <div id="user_avatar_block">
+                    <div class="avatar_upload">+</div>
+                </div>
+                <form id="form_upload_avatar" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                    <input type="file" id="avatar_upload_file" accept="image/*" name="avatar">
+                </form>
+                <form id='form_change_name' action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                    <h4>유저 이름</h4>
+                    <input id="your_name" name="your_name" class="text_pole" maxlength="35" value="" autocomplete="off"><br>
+                    <input id="your_name_button" class="menu_button" type="submit" title="Click to set a new User Name (reloads page)" value="이름 적용">
+                </form>
+                <div class="ui-settings">
+					<div id="waifu-style" class="range-block">
+						<div class="range-block-title">
+							<h4>▼ UI 스타일</h4>				
+							<label for="ui0-style-checkbox">
+								<input id="ui0-style-checkbox" type="radio" name="waifu-style"  value="0" />
+								#1 기본
+							</label>							
+							<label for="ui1-style-checkbox">
+								<input id="ui1-style-checkbox" type="radio" name="waifu-style"  value="1" />
+								#2 우측
+							</label>
+							<label for="ui2-style-checkbox">
+								<input id="ui2-style-checkbox" type="radio" name="waifu-style" value="2" />
+								#3 하단
+							</label>
+							<label for="ui3-style-checkbox">
+								<input id="ui3-style-checkbox" type="radio" name="waifu-style" value="3" />
+								#4 확장
+							</label>						
+							</div>				
+						</div>
+                    <div id="avatars-style" class="range-block">
+                        <div class="range-block-title">
+                            <h4>▼ 사진 스타일</h4>
+                        </div>
+                        <div class="range-block-range">
+                            <label>
+                                <input name="avatar_style" type="radio" value="0" />
+                                원형
+                            </label>
+                            <label>
+                                <input name="avatar_style" type="radio" value="1" />
+                                사각형
+                            </label>
+                        </div>
+                    </div>
+                    <div id="chat-display" class="range-block" title="NOTE: Using bubble chat with Blur Effect on can cause lag on browsers with no Hardware Acceleration.">
+                        <div class="range-block-title">
+                            <h4>▼ 채팅 스타일</h4>
+                        </div>
+                        <div class="range-block-range">
+                            <label>
+                                <input name="chat_display" type="radio" value="0" />
+                                기본
+                            </label>
+                            <label>
+                                <input name="chat_display" type="radio" value="1" />
+                                외곽선
+                            </label>
+                        </div>
+                    </div>
+                    <div id="sheld-width" class="range-block" title="Adjust width of chat display on PCs and other wide screens">
+                        <div class="range-block-title">
+                            <h4>▼ 창 넓이</h4>
+                        </div>
+                        <div class="range-block-range">
+                            <label>
+                                <input name="sheld_width" type="radio" value="0" />
+                                800px
+                            </label>
+                            <label>
+                                <input name="sheld_width" type="radio" value="1" />
+                                1000px
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="power-user-options-block">
+                    <h3>고급 유저 설정</h3>
+                    <div id="power-user-option-checkboxes">
+                        <label for="swipes-checkbox">
+                            <input id="swipes-checkbox" type="checkbox" />
+                            스와이프 기능 활성화
+                        </label>
+
+                        <label for="play_message_sound" class="checkbox_label">
+                            <input id="play_message_sound" type="checkbox" />
+                            <audio id="audio_message_sound" src="sounds/message.mp3" hidden></audio>
+                            <span>
+                                새로운 메세지 알림음 설정
+                                <a href="/notes/message_sound" class="notes-link" target="_blank">
+                                    <span class="note-link-span">?</span>
+                                </a>
+                            </span>
+                        </label>
+
+                        <label for="play_sound_unfocused" class="checkbox_label">
+                            <input id="play_sound_unfocused" type="checkbox" />
+                            외부 창에서만 알림음 설정
+                        </label>
+
+                        <label for="fast_ui_mode" class="checkbox_label" title="블러는 외곽선 채팅 스타일에서 브라우저 지연을 유발할 수 있습니다. 이를 위해 브라우저의 하드웨어 가속을 켜고 브라우저를 다시 시작하거나, 이 토글을 사용하여 블러 효과를 비활성화하세요.">
+                            <input id="fast_ui_mode" type="checkbox" />
+                            채팅창 블러 옵션 끄기
+                        </label>
+						<label for="hide-chat-checkbox">
+							<input id="hide-chat-checkbox" type="checkbox" />
+							채팅창 숨기기
+						</label>						
+
+                        <label for="auto-load-chat-checkbox"><input id="auto-load-chat-checkbox" type="checkbox" />
+                            항상 마지막 채팅 불러오기
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logo_block" class="drawer" style="z-index:3001;" title="Change Background Image">
+            <div id="site_logo" class="drawer-toggle drawer-header">
+                <div class="drawer-icon icon-panorama closedIcon"></div>
+            </div>
+            <div class="drawer-content closedDrawer">
+                <div class="flex-container">
+                    <div id="bg_menu_content">
+                        <form id="form_bg_download" class="bg_example no-border no-shadow" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                            <label class="input-file">
+                                <input type="file" id="add_bg_button" name="avatar" accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp">
+                                <div class="bg_example no-border no-shadow add_bg_but" style="background-image: url('/img/addbg3.png');"></div>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="extensions-settings-button" class="drawer" style="z-index:3004;">
+            <div class="drawer-toggle">
+                <div class="drawer-icon icon-cubes closedIcon" title="Extensions"></div>
+            </div>
+            <div id="rm_extensions_block" class="drawer-content closedDrawer">
+                <div class="extensions_block">
+                    <h3>확장 기능 API :
+                        <a target="_blank" href="https://github.com/SillyLossy/TavernAI-extras">
+                           태번 AI 엑스트라
+                        </a>
+                    </h3>
+                    <input id="extensions_url" type="text" class="text_pole" />
+                    <div class="extensions_url_block">
+                        <input id="extensions_connect" class="menu_button" type="submit" value="연결하기" />
+                        <span class="expander"></span>
+                        <label for="extensions_autoconnect"><input id="extensions_autoconnect" type="checkbox" />
+                            자동 연결 활성화
+                        </label>
+                    </div>
+                    <div id="extensions_status">
+                        연결 끊김...
+                    </div>
+                    <div id="extensions_loaded">
+                        <h4>적용된 확장 기능</h4>
+                        <ul id="extensions_list">
+                        </ul>
+                        <p>빠진 기능이 있나요? <a id="extensions_details" href="javascript:void(null);">여기</a>를 눌러 상태를 확인하세요!</p>
+                    </div>
+                    <div id="extensions_settings">
+                        <h3>▼ 확장 기능 상세 설정</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rightNavHolder" class="drawer" style="z-index:3001;">
+            <div id="unimportantYes" class="drawer-toggle drawer-header">
+                <div id="rightNavDrawerIcon" class="drawer-icon icon-idcard closedIcon" title="Character Management">
+                </div>
+            </div>
+            <nav id="right-nav-panel" class="drawer-content closedDrawer fillRight">
+                <div id="right-nav-panel-tabs">
+                    <div class="right_menu_button" id="rm_button_characters" title="Select/Create Characters">
+                        <img alt="" class="svg_icon" src="img/list-ul-solid.svg" />
+                    </div>
+                    <div class="right_menu_button" id="rm_button_selected_ch">
+                        <h2></h2>
+                    </div>
+                    <div class="right_menu_button" id="rm_button_panel_pin_div" title="Locked = Character Management panel will stay open">
+                        <input type="checkbox" id="rm_button_panel_pin">
+                        <label for="rm_button_panel_pin">
+                            <img class="unchecked svg_icon" alt="" src="img/lock-open-solid.svg" />
+                            <img class="checked svg_icon" alt="" src="img/lock-solid.svg" />
+                        </label>
+                    </div>
+                </div>
+                <div id="rm_ch_create_block" class="right_menu" style="display: none;">
+                    <form id="form_create" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                        <div id="avatar-and-name-block">
+                            <div id="name_div">
+                                <h4>캐릭터 이름</h4>
+                                <input id="character_name_pole" name="ch_name" class="text_pole" placeholder="캐릭터 이름을 정해주세요." maxlength="120" value="" autocomplete="off">
+                            </div>
+                            <div id="avatar_div" class="avatar_div">
+                                <div id="avatar_div_div" class="avatar">
+                                    <img id="avatar_load_preview" src="img/ai4.png" alt="avatar">
+                                </div>
+                                <div class="form_create_bottom_buttons_block">
+                                    <label for="add_avatar_button" class="menu_button" title="새로운 캐릭터 사진 등록">
+                                        <input type="file" id="add_avatar_button" name="avatar" accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp">
+                                        <img alt="" class="svg_icon" src="img/file-image-solid.svg">
+                                    </label>
+                                    <div id="rm_button_back" class="menu_button">
+                                        <img alt="" class="svg_icon" src="img/left-long-solid.svg">
+                                    </div>
+                                    <div id="advanced_div" class="menu_button" title="고급 캐릭터 설정">
+                                        <img alt="" class="svg_icon" src="img/book-solid.svg">
+                                    </div>
+                                    <div id="export_format_popup" class="list-group">
+                                        <div class="export_format list-group-item" data-format="png">PNG</div>
+                                        <div class="export_format list-group-item" data-format="json">JSON</div>
+                                        <div class="export_format list-group-item" data-format="webp">WEBP</div>
+                                    </div>
+                                    <div id="export_button" class="menu_button" title="캐릭터 내보내기">
+                                        <img alt="" class="svg_icon" src="img/file-export-solid.svg">
+                                    </div>
+                                    <!-- <div id="create_button" class="menu_button" type="submit" title="Create Character">✅</div> -->
+                                    <label for="create_button" id="create_button_label" class="menu_button" title="Create Character">
+                                        <input type="submit" id="create_button" name="create_button">
+                                        <img alt="" class="svg_icon" src="img/user-check-solid.svg">
+                                    </label>
+                                    <!-- <input id="create_button" class="menu_button" title="Create Character" type="submit" value="✅"> -->
+                                    <div id="delete_button" class="menu_button" title="캐릭터 삭제">
+                                        <img alt="" class="svg_icon" src="img/trash-can-solid.svg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="result_info"></div>
+                        </div>
+                        <hr>
+                        <div id="description_div" class="margin-bot-10px">
+                            캐릭터 설명
+                            <a href="/notes/1" class="notes-link" target="_blank">
+                                <span class="note-link-span">?</span>
+                            </a>
+
+                        </div>
+                        <textarea id="description_textarea" placeholder="캐릭터에 대한 설명을 작성해주세요." class="margin-bot-10px" name="description" placeholder=""></textarea>
+
+                        <div id="first_message_div" class="margin-bot-10px">
+                            첫 메세지
+                            <a href="/notes/3" class="notes-link" target="_blank">
+                                <span class="note-link-span">?</span>
+                            </a>
+
+                        </div>
+                        <textarea id="firstmessage_textarea" placeholder="작성된 첫 메세지는 향후 캐릭터의 성격과 대사에 영향을 미칩니다." class="margin-bot-10px" name="first_mes" placeholder=""></textarea>
+
+                        <!-- these divs are invisible and used for server communication purposes -->
+                        <div id="hidden-divs">
+                            <div id="avatar_url_div">
+                                <input id="avatar_url_pole" name="avatar_url" class="text_pole" maxlength="999" size="2" value="" autocomplete="off">
+                            </div>
+                            <div id="selected_chat_div">
+                                <input id="selected_chat_pole" name="chat" class="text_pole" maxlength="999" size="2" value="" autocomplete="off">
+                            </div>
+                            <div id="create_date_div">
+                                <input id="create_date_pole" name="create_date" class="text_pole" maxlength="999" size="2" value="" autocomplete="off">
+                            </div>
+                            <div id="last_mes_div">
+                                <input id="last_mes_pole" name="last_mes" class="text_pole" maxlength="999" size="2" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <!-- now back to normal divs for display purposes-->
+                    </form>
+                </div>
+                <div id="rm_group_chats_block" class="right_menu">
+                    <div id="rm_group_top_bar">
+                        <div id="rm_button_back_from_group" class="menu_button">
+                            <img alt="" class="svg_icon" src="img/left-long-solid.svg">
+                        </div>
+                        <input id="rm_group_chat_name" class="text_pole" type="text" name="chat_name" placeholder="채팅 이름 (선택)" />
+                    </div>
+                    <div id="rm_group_buttons">
+                        <div class="rm_group_settings">
+                            <label class="checkbox_label">
+                                <input id="rm_group_allow_self_responses" type="checkbox" />
+                                캐릭터 자문자답 허용
+                            </label>
+                            <label id="rm_group_automode_label" class="checkbox_label">
+                                <input id="rm_group_automode" type="checkbox" />
+                                자동 대화 진행
+                            </label>
+                            <h5>
+                                그룹 대화 스타일 변경
+                                <a href="/notes/group_reply_strategy" class="notes-link" target="_blank"><span class="note-link-span">?</span></a>
+                            </h5>
+                            <label>
+                                <input type="radio" name="rm_group_activation_strategy" value="0" />
+                                자연스러운 대화
+                            </label>
+                            <label>
+                                <input type="radio" name="rm_group_activation_strategy" value="1" />
+                                순서대로 대화
+                            </label>
+                        </div>
+                        <div id="rm_group_buttons_expander">&nbsp;</div>
+                        <input id="rm_group_submit" class="menu_button" type="submit" value="Create">
+                        <input id="rm_group_delete" class="menu_button" type="submit" value="Delete">
+                    </div>
+                    <div id="rm_group_add_members_header">
+                        <h4>새로운 캐릭터 추가</h4>
+                        <input id="rm_group_filter" class="text_pole" type="search" placeholder="필터..." />
+                    </div>
+                    <!-- !!!Don't break line after div!!! -->
+                    <div id="rm_group_add_members"></div>
+                    <h3>그룹에 참여중인 캐릭터</h3>
+                    <!-- !!!Don't break line after div!!! -->
+                    <div id="rm_group_members"></div>
+
+                    <div id="group_member_template">
+                        <div class="group_member">
+                            <div class="avatar">
+                                <img alt="Avatar" src="" />
+                            </div>
+                            <div class="ch_name"></div>
+                            <div class="group_member_icon">
+                                <img alt="Remove" class="minus svg_icon" src="img/minus-solid.svg">
+                                <img alt="Add" class="plus svg_icon" src="img/plus-solid.svg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="group_list_template">
+                        <div class="group_select">
+                            <div class="avatar">
+                                <img src="">
+                            </div>
+                            <div class="group_icon">
+                                <img class="svg_icon" src="img/user-group-solid.svg">
+                            </div>
+                            <div class="ch_name"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="rm_character_import" class="right_menu" style="display: none;">
+                    <form id="form_import" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                        <input type="file" id="character_import_file" accept=".json, image/png, image/webp" name="avatar">
+                        <input id="character_import_file_type" name="file_type" class="text_pole" maxlength="999" size="2" value="" autocomplete="off">
+                    </form>
+                </div>
+                <div id="rm_characters_block" class="right_menu">
+                    <div class="form_create_bottom_buttons_block">
+                        <div id="rm_button_create" title="새 캐릭터 만들기" class="menu_button">
+                            <img alt="" class="svg_icon" src="img/user-plus-solid.svg">
+                        </div>
+                        <div id="character_import_button" title="파일에서 캐릭터 가져오기" class="menu_button">
+                            <img alt="" class="svg_icon" src="img/file-arrow-up-solid.svg">
+                        </div>
+                        <div id="rm_button_group_chats" title="새 그룹 채팅 만들기" class="menu_button">
+                            <img alt="" class="svg_icon" src="img/user-group-solidplus.svg">
+                        </div>
+                    </div>
+                    <form id="form_character_search_form" action="javascript:void(null);">
+                        <input id="character_search_bar" class="text_pole" type="search" placeholder="캐릭터 검색..." />
+                        <select id="character_sort_order" title="Characters sorting order">
+                            <option data-field="date_last_chat" data-order="desc">최근 사용</option>
+                            <option data-field="name" data-order="asc">이름 정렬 - A~Z</option>
+                            <option data-field="name" data-order="desc">이름 정렬 - Z~A</option>
+                            <option data-field="date_added" data-order="desc">날짜 정렬 - 최신순</option>
+                            <option data-field="date_added" data-order="asc">날짜 정렬 - 과거순</option>
+                            <option data-field="chat_size" data-order="desc">가장 많은 채팅순</option>
+                            <option data-field="chat_size" data-order="asc">가장 적은 채팅순</option>
+                        </select>
+                    </form>
+                    <div id="rm_print_characters_block"></div>
+                </div>
+
+                <div id="rm_info_block" class="right_menu">
+                    <div id="rm_info_panel">
+                        <div id="rm_info_avatar"></div>
+                        <div id="rm_info_text"></div>
+                        <div id="rm_info_button" class="menu_button">뒤로</div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+    <!-- various fullscreen popups -->
+    <div id="shadow_popup">
+        <div id="dialogue_popup">
+            <div id="dialogue_popup_text">
+                <h3>텍스트</h3>
+            </div>
+            <input id="dialogue_popup_input" class="text_pole" type="text" />
+            <div id="dialogue_popup_ok" class="menu_button">삭제</div>
+            <div id="dialogue_popup_cancel" class="menu_button">취소</div>
+        </div>
+    </div>
+    <div id="colab_shadow_popup">
+        <div id="colab_popup">
+            <div id="colab_popup_text" style="float: left;margin-left: 88px;">
+                <h3>초기화</h3>
+            </div>
+        </div>
+    </div>
+    <!--<div id="shadow_character_popup">
+        </div>-->
+    <div id="character_popup">
+
+        <div id="character_popup_text">
+            <div>
+                <img src="img/book2.png" id="advanced_book_logo">
+            </div>
+
+            <div>
+                <h3 id="character_popup_text_h3"></h3> - 고급 캐릭터 설정
+            </div>
+
+        </div>
+        <img id="character_cross" src="img/cross.png" style="position: absolute; right: 15px; top: 15px; width: 20px; height: 20px; cursor: pointer; opacity: 0.6">
+
+        <div id="personality_div">
+            <hr>
+            <h4>캐릭터 성격 요약</h4>
+            <h5>단어와 쉼표로 구분된 성격 요약입니다.<a href="/notes/2" class="notes-link" target="_blank"><span class="note-link-span">?</span></a></h5>
+            <textarea id="personality_textarea" name="personality" placeholder="" form="form_create" class="text_pole" autocomplete="off" rows="3"></textarea>
+        </div>
+
+        <div id="scenario_div">
+            <h4>시나리오</h4>
+            <h5>전체 스토리의 상황과 맥락을 결정합니다.
+                <a href="/notes/12" class="notes-link" target="_blank">
+                    <span class="note-link-span">?</span>
+                </a>
+            </h5>
+            <textarea id="scenario_pole" name="scenario" class="text_pole" maxlength="9999" value="" autocomplete="off" form="form_create" rows="3"></textarea>
+        </div>
+
+        <div id="talkativeness_div">
+            <h4>그룹 채팅 대화 빈도</h4>
+            <h5>캐릭터의 대화 빈도를 결정합니다 : &nbsp;<span class="warning">그룹 채팅에서만 적용됩니다!</span>
+            </h5>
+            <input id="talkativeness_slider" name="talkativeness" type="range" min="0" max="1" step="0.05" value="0.5" form="form_create">
+            <div id="talkativeness_hint">
+                <span>매우 말이 적음</span>
+                <span>일반적</span>
+                <span>매우 말이 많음</span>
+            </div>
+        </div>
+
+        <div id="mes_example_div">
+            <div>
+                <h4>캐릭터 대화 예시</h4>
+                <h5>캐릭터의 향후 성격과 대화에 큰 영향을 미칩니다.<a href="/notes/11" class="notes-link" target="_blank"><span class="note-link-span">?</span></a></h5>
+            </div>
+            <textarea id="mes_example_textarea" name="mes_example" placeholder="" form="form_create"></textarea>
+        </div>
+        <div id="character_popup_ok" class="menu_button">저장</div>
+
+    </div>
+    <div id="world_popup">
+        <div id="world_popup_text">
+            <img id="world_cross" src="img/cross.png">
+            <div id="world_popup_header">
+                <!-- Consider changing logo to something else -->
+                <img src="img/book2.png" id="world_logo">
+                <h3>
+                    월드 인포 에디터
+                    <a href="/notes/13_3" class="notes-link" target="_blank"><span class="note-link-span">?</span></a>
+                </h3>
+                <div class="world_popup_expander">&nbsp;</div>
+                <form id="form_rename_world" action="javascript:void(null);" method="post" enctype="multipart/form-data">
+                    <input id="world_popup_name" name="world_popup_name" class="text_pole" maxlength="99" size="32" value="" autocomplete="off">
+                    <input id="world_popup_name_button" class="menu_button" type="submit" value="이름 재설정">
+                </form>
+            </div>
+        </div>
+
+        <div id="world_popup_entries_list">
+        </div>
+
+        <div id="world_popup_bottom_holder">
+            <div id="world_popup_new" class="menu_button">새로운 항목 추가</div>
+            <span class="world_popup_expander">&nbsp;</span>
+            <div id="world_popup_export" class="menu_button">내보내기</div>
+            <div id="world_popup_delete" class="menu_button">월드 삭제</div>
+        </div>
+
+        <div id="entry_edit_template">
+            <div class="world_entry">
+                <form class="world_entry_form">
+                    <div class="world_entry_thin_controls">
+                        <div class="world_entry_form_control">
+                            <label for="key">
+                                <h4>키워드</h4>
+                                <h5>쉼표로 구분된 키워드 리스트 (예: foo,bar)</h5>
+                            </label>
+                            <textarea class="text_pole" name="key" rows="1" placeholder=""></textarea>
+                        </div>
+                        <div class="world_entry_form_control keysecondary">
+                            <label for="keysecondary">
+                                <h4>보조 키워드</h4>
+                                <h5>쉼표로 구분된 보조 키워드 리스트</h5>
+                            </label>
+                            <textarea class="text_pole" name="keysecondary" rows="1" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="world_entry_thin_controls">
+                        <div class="world_entry_form_control">
+                            <label for="order">
+                                <h4>우선 순위</h4>
+                                <h5>숫자가 높을 수록 우선 적용</h5>
+                            </label>
+                            <input class="text_pole" type="number" name="order" placeholder="" />
+                        </div>
+                        <div class="world_entry_form_control">
+                            <label for="comment">
+                                <h4>메모</h4>
+                                <h5>사용자의 편의를 위한 메모 공간 (AI 에 영향 없음)</h5>
+                            </label>
+                            <textarea class="text_pole" rows="1" name="comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="world_entry_form_control">
+                        <label for="content">
+                            <h4>내용</h4>
+                            <h5>키워드 활성화 시 프롬프트에 작성될 내용 (권장 토큰 수 : 50~100)</h5>
+                        </label>
+                        <textarea class="text_pole" name="content" rows="4" placeholder=""></textarea>
+                    </div>
+                    <div class="world_entry_form_control world_entry_form_horizontal">
+                        <label class="checkbox">
+                            <input type="checkbox" name="constant" />
+                            <h4>반복 적용 (주의)</h4>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="selective" />
+                            <h4>선택적 적용</h4>
+                        </label>
+                        <div class="world_entry_form_control world_entry_form_radios">
+                            <div>
+                                <label><input type="radio" name="position" value="0">
+                                    <h4>적당히 사용</h4>
+                                </label>
+                            </div>
+                            <div>
+                                <label><input type="radio" name="position" value="1">
+                                    <h4>무조건 사용</h4>
+                                </label>
+                            </div>
+                        </div>
+                        <span class="world_popup_expander">&nbsp;</span>
+                        <h5 class="world_entry_form_uid">
+                            UID:
+                            &nbsp;
+                            <span class="world_entry_form_uid_value"></span>
+                        </h5>
+                        <h5 class="world_entry_form_tokens">
+                            토큰 사용량 :
+                            &nbsp;
+                            <span class="world_entry_form_token_counter">0</span>
+                        </h5>
+                        <input class="menu_button delete_entry_button" type="submit" value="항목 삭제" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="shadow_select_chat_popup">
+        <div id="select_chat_popup">
+            <div id="select_chat_import"> <!-- import chat popup header -->
+                <div id="chat_import_button" class="menu_button">
+                    <img alt="" class="svg_icon" src="img/file-arrow-up-solid.svg" />
+                </div>
+                <div id="selectChatPopupHeaderText" class="TxtLrgBoldCenter">
+                    <span id="ChatHistoryCharName"></span>
+                    <br>
+                    채팅 기록
+                    <a href="/notes/10" class="notes-link" target="_blank"><span class="note-link-span">?</span></a>
+                </div>
+                <form id="form_import_chat" action="javascript:void(null);" method="post" enctype="multipart/form-data" style="display: none;">
+                    <input type="file" id="chat_import_file" accept=".json, .jsonl" name="avatar">
+                    <input id="chat_import_file_type" name="file_type" class="text_pole" maxlength="999" size="2" value="" autocomplete="off" style="display: none;">
+                    <input id="chat_import_avatar_url" name="avatar_url" class="text_pole" maxlength="999" size="2" value="" autocomplete="off" style="display: none;">
+                    <input id="chat_import_character_name" name="character_name" class="text_pole" maxlength="999" size="2" value="" autocomplete="off" style="display: none;">
+                </form>
+                <img id="select_chat_cross" src="img/cross.png" alt="Close Past Chat Popup">
+            </div>
+
+            <div id="select_chat_div">
+
+            </div>
+            <div id="load_select_chat_div">
+                <img src="img/load.svg">
+            </div>
+        </div>
+    </div>
+
+    <!-- templates for JS to reuse when needed -->
+    <div id="message_template">
+        <div class="mes" mesid="${count_view_mes}" ch_name="${characterName}" is_user="${mes.is_user}" is_system="${mes.is_system}">
+            <div class="for_checkbox"></div><input type="checkbox" class="del_checkbox">
+            <div class="avatar"><img src=""></div>
+            <div class="swipe_left"><img src="img/swipe_left.png"></div>
+            <div class="mes_block">
+                <div class="ch_name">
+                    <span class="name_text">${characterName}</span>
+
+                    <div title="Edit" class="mes_edit"></div>
+                    <div class="mes_edit_buttons">
+                        <div class="mes_edit_done menu_button" title="Confirm">
+                            <img alt="" class="svg_icon" src="img/check-solid.svg">
+                        </div>
+                        <div class="mes_edit_copy menu_button" title="Copy this message">
+                            <img alt="" class="svg_icon" src="img/copy-solid.svg">
+                        </div>
+                        <div class="mes_edit_delete menu_button" title="Delete this message">
+                            <img alt="" class="svg_icon" src="img/scissors-solid.svg">
+                        </div>
+                        <div class="mes_edit_up menu_button" title="Move message up">
+                            <img alt="" class="svg_icon" src="img/chevron-up-solid.svg">
+                        </div>
+                        <div class="mes_edit_down menu_button" title="Move message down">
+                            <img alt="" class="svg_icon" src="img/chevron-down-solid.svg">
+                        </div>
+                        <div class="mes_edit_cancel menu_button" title="Cancel">
+                            <img alt="" class="svg_icon" src="img/xmark-solid.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class=mes_text></div>
+                <div class="mes_bias"></div>
+            </div>
+
+
+            <div class="swipe_right">
+                <img src="img/swipe_right.png">
+                <div class="swipes-counter"></div>
+            </div>
+        </div>
+    </div>
+    <div id="group_avatars_template">
+        <div class="avatar avatar_collage collage_1">
+            <img alt="img1" class="img_1" src="">
+        </div>
+        <div class="avatar avatar_collage collage_2">
+            <img alt="img1" class="img_1" src="">
+            <img alt="img2" class="img_2" src="">
+        </div>
+        <div class="avatar avatar_collage collage_3">
+            <img alt="img1" class="img_1" src="">
+            <img alt="img2" class="img_2" src="">
+            <img alt="img3" class="img_3" src="">
+        </div>
+        <div class="avatar avatar_collage collage_4">
+            <img alt="img1" class="img_1" src="">
+            <img alt="img2" class="img_2" src="">
+            <img alt="img3" class="img_3" src="">
+            <img alt="img4" class="img_4" src="">
+        </div>
+    </div>
+
+    <!-- chat and input bar -->
+    <div id="typing_indicator_template">
+        <div class="typing_indicator"><span class="typing_indicator_name">CHAR</span> 채팅 작성중...</div>
+    </div>
+    <div id="sheld">
+        <div id="chat">
+        </div>
+        <div id="form_sheld">
+            <div id="dialogue_del_mes">
+                <div id="dialogue_del_mes_ok" class="menu_button">삭제</div>
+                <div id="dialogue_del_mes_cancel" class="menu_button">취소</div>
+            </div>
+            <form id="send_form">
+                <div id="options_button">
+                    <div id="options">
+                        <div class="options-content">
+                            <a id="option_back_to_main">
+                                <img class="svg_icon" alt="" src="img/left-long-solid.svg">
+                                <span>채팅으로 돌아가기</span>
+                            </a>
+                            <a id="option_new_bookmark">
+                                <img class="svg_icon" alt="" src="img/bookmark-solid.svg">
+                                <span>북마크 저장</span>
+                            </a>
+                            <a id="option_start_new_chat">
+                                <img class="svg_icon" alt="" src="img/comment-dots-solid.svg">
+                                <span>채팅 초기화</span></a>
+                            <a id="option_select_chat">
+                                <img class="svg_icon" alt="" src="img/address-book-solid.svg">
+                                <span>이전 채팅 기록</span>
+                            </a>
+                            <hr>
+                            <a id="option_delete_mes">
+                                <img class="svg_icon" alt="" src="img/trash-can-solid.svg">
+                                <span>메세지 삭제</span>
+                            </a>
+                            <a id="option_regenerate">
+                                <img class="svg_icon" alt="" src="img/repeat-solid.svg">
+                                <span>채팅 재생성</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <textarea id="send_textarea" placeholder="API 와 연결되어있지 않습니다!" name="text"></textarea>
+                <div id="send_but_sheld">
+                    <div id="loading_mes">
+                        <img alt="" class="svg_icon" src="img/hourglass-half-solid.svg" />
+                    </div>
+                    <input id="send_but" type="button">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

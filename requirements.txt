@@ -1,0 +1,10 @@
+flask
+flask-cloudflared
+flask-cors
+markdown
+Pillow
+colorama
+--extra-index-url https://download.pytorch.org/whl/cu117
+torch==2.0.0+cu117
+git+https://github.com/huggingface/transformers
+webuiapi

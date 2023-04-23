@@ -1,0 +1,10 @@
+{
+    "display_name": "Character Expressions",
+    "loading_order": 6,
+    "requires": [],
+    "optional": [
+        "classify"
+    ],
+    "js": "index.js",
+    "css": "style.css"
+}

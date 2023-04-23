@@ -1,0 +1,14 @@
+flask
+flask-cloudflared
+flask-cors
+markdown
+Pillow
+colorama
+webuiapi
+--extra-index-url https://download.pytorch.org/whl/cu117
+torch==2.0.0+cu117
+torchvision==0.15.1
+torchaudio==2.0.1
+accelerate
+git+https://github.com/huggingface/transformers
+git+https://github.com/huggingface/diffusers
